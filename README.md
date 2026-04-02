@@ -2,6 +2,17 @@
 
 Un sistema de segundo cerebro construido sobre archivos de texto plano y Claude. Sin bases de datos, sin código, sin lock-in. El sistema aprende con el uso y se vuelve más útil con el tiempo.
 
+## ¿Con qué herramienta usarlo?
+
+Este repositorio está diseñado para usarse con un **coding AI** que pueda leer y editar archivos directamente en tu máquina:
+
+- **[Claude Code](https://claude.ai/code)** — la opción nativa de Anthropic, ideal para este tipo de sistemas basados en ficheros
+- **[Cursor](https://cursor.com)** — editor de código con agente IA integrado, muy efectivo para gestionar el repo en el día a día
+
+También funciona dentro de **Claude Desktop** si tenés habilitado el acceso a herramientas de ficheros y usás el proyecto como workspace de contexto.
+
+La diferencia práctica: con un coding AI el agente edita los archivos directamente en tu repositorio. Con Claude Desktop sin herramientas, el flujo es más manual (copiás y pegás el contenido).
+
 ---
 
 ## Base técnica: markdown puro
