@@ -90,14 +90,43 @@ El sistema tiene capas. Cada archivo tiene un rol específico y se relaciona con
 
 ## ¿Con qué herramienta usarlo?
 
-Este repositorio está diseñado para usarse con un **coding AI** que pueda leer y editar archivos directamente en tu máquina:
+Este repositorio está diseñado para usarse con una herramienta que le dé a Claude acceso directo a tus archivos locales. Hay tres opciones principales:
 
-- **[Claude Code](https://claude.ai/code)** — la opción nativa de Anthropic, ideal para este tipo de sistemas basados en ficheros
-- **[Cursor](https://cursor.com)** — editor de código con agente IA integrado, muy efectivo para gestionar el repo en el día a día
+---
 
-También funciona dentro de **Claude Desktop** si tenés habilitado el acceso a herramientas de ficheros y usás el proyecto como workspace de contexto.
+### Opción A — Claude Code
+**[claude.ai/code](https://claude.ai/code)** · La opción nativa de Anthropic para trabajo agentic basado en ficheros. Claude lee y edita el repositorio directamente desde el terminal. Ideal si ya trabajás con CLI y querés el mayor control posible sobre lo que hace el agente.
 
-La diferencia práctica: con un coding AI el agente edita los archivos directamente en tu repositorio. Con Claude Desktop sin herramientas, el flujo es más manual (copiás y pegás el contenido).
+---
+
+### Opción B — Cursor
+**[cursor.com](https://cursor.com)** · Editor de código con agente IA integrado. La interfaz es más visual que Claude Code y no requiere terminal. Muy efectivo para gestionar el repo en el día a día: abrís la carpeta, escribís tu request, Claude edita los archivos.
+
+---
+
+### Opción C — Claude Desktop con Cowork
+**[claude.com/product/cowork](https://claude.com/product/cowork)** · La opción más accesible si no querés abrir un IDE ni una terminal. Cowork es una pestaña dentro de Claude Desktop que trae la misma arquitectura agentic que Claude Code — sin código, sin terminal — para trabajo de conocimiento.
+
+Con Cowork podés:
+- Apuntar Claude a la carpeta de este repositorio y darle acceso directo a los ficheros
+- Definir **instrucciones globales** (Settings → Cowork → Global instructions) para cargar el contenido de `BRAIN.md` y `CLAUDE.md` como contexto permanente
+- Usar **Projects** para organizar el segundo cerebro como un workspace con sus propios ficheros, instrucciones y memoria persistente
+- Configurar **tareas programadas** (comando `/schedule`) para el morning brief, midday pulse y weekly review — sin código, desde la misma interfaz
+
+> **Requisitos:** Claude Desktop para macOS o Windows, plan de pago (Pro, Max, Team o Enterprise). Cowork está en research preview. [Verificá si tu equipo es compatible](https://support.claude.com/en/articles/13345190-getting-started-with-cowork).
+
+---
+
+**Diferencia práctica entre las tres opciones:**
+
+| | Claude Code | Cursor | Cowork |
+|---|---|---|---|
+| Requiere terminal | Sí | No | No |
+| Requiere IDE | No | Sí | No |
+| Acceso a ficheros locales | ✓ | ✓ | ✓ |
+| Tareas programadas | Vía cron | Vía cron | Nativo (`/schedule`) |
+| Proyectos con memoria | No | No | ✓ |
+| Plan de pago requerido | No (uso limitado) | Sí (Cursor) | Sí (Anthropic) |
 
 ### Conectar herramientas externas con MCP
 
