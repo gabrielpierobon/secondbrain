@@ -6,6 +6,88 @@ Este sistema es una extensión de tu memoria de trabajo. Registra lo que pasa en
 
 La curva es corta: en la primera semana el sistema empieza a ser útil, en el primer mes ya tiene contexto real, en tres meses es difícil trabajar sin él.
 
+---
+
+## Cómo encajan los archivos entre sí
+
+El sistema tiene capas. Cada archivo tiene un rol específico y se relaciona con los demás de una forma concreta.
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        CADA SESIÓN                              │
+│                                                                 │
+│   Claude lee esto al arrancar:                                  │
+│                                                                 │
+│   ┌──────────────┐   ┌──────────────┐   ┌───────────────────┐  │
+│   │  BRAIN.md    │   │  memory.md   │   │  tracking/        │  │
+│   │              │   │              │   │                   │  │
+│   │ Quién sos.   │   │ Qué decidiste│   │ Qué está pasando  │  │
+│   │ Cómo trabajás│   │ en sesiones  │   │ ahora mismo:      │  │
+│   │ Qué priorizás│   │ anteriores.  │   │ proyectos, hilos, │  │
+│   │ Reglas fijas │   │ Qué aprendiste│  │ bloqueos, dailies │  │
+│   │ que no cambian│  │ Se actualiza  │  │ Se actualiza cada │  │
+│   │              │   │ al cerrar    │   │ sesión            │  │
+│   └──────┬───────┘   └──────┬───────┘   └────────┬──────────┘  │
+│          │                  │                    │              │
+│          └──────────────────┴────────────────────┘              │
+│                             │                                   │
+│                             ▼                                   │
+│                    ┌────────────────┐                           │
+│                    │   CLAUDE.md    │                           │
+│                    │                │                           │
+│                    │ El motor.      │                           │
+│                    │ Define qué     │                           │
+│                    │ hace Claude en │                           │
+│                    │ cada sesión,   │                           │
+│                    │ en qué orden,  │                           │
+│                    │ y qué agente   │                           │
+│                    │ usar según la  │                           │
+│                    │ tarea          │                           │
+│                    └───────┬────────┘                           │
+│                            │                                    │
+│              ┌─────────────┼─────────────┐                     │
+│              ▼             ▼             ▼                      │
+│        ┌──────────┐  ┌──────────┐  ┌──────────┐               │
+│        │ Agent A  │  │ Agent B  │  │ Agent C  │               │
+│        │          │  │          │  │          │               │
+│        │ Un rol   │  │ Un rol   │  │ Un rol   │               │
+│        │ específico│ │ específico│ │ específico│              │
+│        │ (tracker,│  │(propuestas│ │(comms,   │               │
+│        │ research…│  │ research…)│ │ agenda…) │               │
+│        └────┬─────┘  └────┬─────┘  └────┬─────┘               │
+│             │             │             │                       │
+│             ▼             ▼             ▼                       │
+│        ┌─────────────────────────────────────┐                 │
+│        │              Skills                 │                 │
+│        │                                     │                 │
+│        │  Instrucciones de ejecución para     │                 │
+│        │  tareas concretas: formato, reglas,  │                 │
+│        │  criterios de calidad, pasos exactos │                 │
+│        └─────────────────────────────────────┘                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Qué hace cada pieza
+
+| Archivo | Rol | Cuándo se lee | Cuándo se escribe |
+|---------|-----|---------------|-------------------|
+| `BRAIN.md` | Tu identidad y reglas de decisión permanentes | Al inicio de cada sesión | Solo cuando cambian tus prioridades o forma de trabajar |
+| `CLAUDE.md` | El motor: rutina de sesión + tabla de despacho a agentes | Al inicio de cada sesión | Rara vez — cuando cambia la rutina o agregás agentes |
+| `tracking/memory.md` | Decisiones tácticas y aprendizajes acumulados entre sesiones | Al inicio de cada sesión | Al cerrar sesión y en la revisión semanal |
+| `tracking/dashboard.md` | Estado maestro de todo lo activo ahora mismo | Al inicio de cada sesión | Cada sesión — es el más dinámico |
+| `tracking/daily/YYYY-MM-DD.md` | Log del día: qué pasó, qué se decidió, qué quedó pendiente | Solo el del día en curso | Durante y al final de cada sesión |
+| `.claude/agents/*.md` | Rol especializado para un tipo de tarea | Cuando CLAUDE.md lo despacha | Cuando refinás cómo opera ese agente |
+| `.claude/skills/*.md` | Instrucciones de ejecución: formatos, pasos, criterios | Cuando el agente correspondiente lo necesita | Cuando querés mejorar la calidad de una tarea específica |
+
+**El flujo en una sesión normal:**
+1. Claude lee `BRAIN.md` → `memory.md` → `tracking/` (contexto completo)
+2. `CLAUDE.md` define qué hacer: resumen del día, updates pendientes, comunicaciones
+3. Si aparece una tarea específica (ej. redactar propuesta), `CLAUDE.md` despacha al agente correcto
+4. El agente carga su skill y ejecuta con ese contexto
+5. Al cerrar: `tracking/` actualizado, `memory.md` con lo importante del día
+
+---
+
 ## ¿Con qué herramienta usarlo?
 
 Este repositorio está diseñado para usarse con un **coding AI** que pueda leer y editar archivos directamente en tu máquina:
