@@ -1,6 +1,10 @@
 # Second Brain con Claude — Plantilla base
 
-Un sistema de segundo cerebro construido sobre archivos de texto plano y Claude. Sin bases de datos, sin código, sin lock-in. El sistema aprende con el uso y se vuelve más útil con el tiempo.
+Este sistema es una extensión de tu memoria de trabajo. Registra lo que pasa en tu ámbito laboral o productivo — decisiones, conversaciones, bloqueos, tareas pendientes — y le da a Claude el contexto necesario para ayudarte de verdad: con seguimiento real, sin repetir lo que ya sabés, sin perder el hilo entre sesiones.
+
+**Su utilidad depende directamente de la frecuencia con la que lo usás.** Un segundo cerebro que solo se abre una vez por semana es poco más que un repositorio. Uno que se consulta y actualiza todos los días se vuelve un colaborador que conoce tu trabajo tan bien como vos.
+
+La curva es corta: en la primera semana el sistema empieza a ser útil, en el primer mes ya tiene contexto real, en tres meses es difícil trabajar sin él.
 
 ## ¿Con qué herramienta usarlo?
 
@@ -12,6 +16,25 @@ Este repositorio está diseñado para usarse con un **coding AI** que pueda leer
 También funciona dentro de **Claude Desktop** si tenés habilitado el acceso a herramientas de ficheros y usás el proyecto como workspace de contexto.
 
 La diferencia práctica: con un coding AI el agente edita los archivos directamente en tu repositorio. Con Claude Desktop sin herramientas, el flujo es más manual (copiás y pegás el contenido).
+
+### Conectar herramientas externas con MCP
+
+Para que el sistema pueda interactuar con el mundo exterior — leer emails, buscar en la web, procesar documentos, enviar notificaciones — se recomienda conectar un **MCP server** (Model Context Protocol).
+
+MCP es el protocolo estándar de Anthropic para que Claude acceda a herramientas externas de forma controlada. Algunos ejemplos de lo que podés conectar:
+
+| Herramienta | Para qué sirve en este sistema |
+|-------------|-------------------------------|
+| Gmail / Outlook | Leer emails con updates, generar borradores de respuesta |
+| Búsqueda web | Investigación, verificación de datos, contexto de mercado |
+| Google Drive / OneDrive | Leer documentos, propuestas, presentaciones |
+| OCR | Extraer texto de imágenes o PDFs escaneados |
+| Slack / Teams | Leer mensajes relevantes, preparar respuestas |
+| Notificaciones push (ntfy, Telegram, etc.) | Recibir resúmenes en el móvil |
+
+Para explorar los MCP servers disponibles: [mcp.so](https://mcp.so) o el [repositorio oficial de Anthropic](https://github.com/anthropics/anthropic-mcp-servers).
+
+El sistema funciona sin MCP — pero con herramientas conectadas pasa de ser un gestor de notas a un agente que actúa sobre tu entorno real.
 
 ---
 
